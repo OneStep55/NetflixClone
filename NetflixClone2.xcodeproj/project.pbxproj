@@ -30,6 +30,8 @@
 		4D59CF4729E4353900A9B559 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59CF4629E4353900A9B559 /* TitleCollectionViewCell.swift */; };
 		4D59CF4A29E4358300A9B559 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 4D59CF4929E4358300A9B559 /* SDWebImage */; };
 		4D59CF4C29E4358300A9B559 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4D59CF4B29E4358300A9B559 /* SDWebImageMapKit */; };
+		4D59CF9029E8301A00A9B559 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59CF8F29E8301A00A9B559 /* MovieTableViewCell.swift */; };
+		4D59CF9229E835F500A9B559 /* MovieVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59CF9129E835F500A9B559 /* MovieVIewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		4D59CEFA29E2D45A00A9B559 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		4D59CEFC29E30C7E00A9B559 /* TV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TV.swift; sourceTree = "<group>"; };
 		4D59CF4629E4353900A9B559 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		4D59CF8F29E8301A00A9B559 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		4D59CF9129E835F500A9B559 /* MovieVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVIewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,7 @@
 		4D59CED329D7361A00A9B559 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				4D59CF9129E835F500A9B559 /* MovieVIewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 				4D59CEE129D743C200A9B559 /* CollectionViewTableViewCell.swift */,
 				4D59CEE329D8853A00A9B559 /* HeroHeaderView.swift */,
 				4D59CF4629E4353900A9B559 /* TitleCollectionViewCell.swift */,
+				4D59CF8F29E8301A00A9B559 /* MovieTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -367,11 +373,13 @@
 				4D59CEFD29E30C7E00A9B559 /* TV.swift in Sources */,
 				4D59CED929D7377400A9B559 /* MainTabBarViewController.swift in Sources */,
 				4D59CEA429D7350600A9B559 /* MainViewController.swift in Sources */,
+				4D59CF9029E8301A00A9B559 /* MovieTableViewCell.swift in Sources */,
 				4D59CEE429D8853A00A9B559 /* HeroHeaderView.swift in Sources */,
 				4D59CEE229D743C200A9B559 /* CollectionViewTableViewCell.swift in Sources */,
 				4D59CEF629E2D3BB00A9B559 /* APICaller.swift in Sources */,
 				4D59CEFB29E2D45A00A9B559 /* Movie.swift in Sources */,
 				4D59CEA029D7350600A9B559 /* AppDelegate.swift in Sources */,
+				4D59CF9229E835F500A9B559 /* MovieVIewModel.swift in Sources */,
 				4D59CEA229D7350600A9B559 /* SceneDelegate.swift in Sources */,
 				4D59CF4729E4353900A9B559 /* TitleCollectionViewCell.swift in Sources */,
 				4D59CEF429E0890500A9B559 /* Extensions.swift in Sources */,
