@@ -99,6 +99,12 @@ class APICaller {
         let parameters = ["api_key": Constants.API_KEY]
         return fetchMovies(endpoint: endpoint, paremeters: parameters)
     }
+    func fetchDiscoverMovies() -> Promise<[Movie]> {
+        let endpoint = "/3/discover/movie"
+        let parameters = ["api_key": Constants.API_KEY, "language": "en-US", "sort_by": "popularity.desc", "include_video": "false", "page": "1", "with_watch_monetization_types": "flatrate"]
+        
+        return fetchMovies(endpoint: endpoint, paremeters: parameters)
+    }
     
     func fetchTrendingTV() -> Promise<[TV]> {
         

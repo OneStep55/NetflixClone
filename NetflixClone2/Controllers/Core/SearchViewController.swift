@@ -6,13 +6,49 @@
 //
 
 import UIKit
-
+import PromiseKit
 class SearchViewController: UIViewController {
+    
+    var models = [MovieViewModel]()
+    
+    let moviesTable: UITableView = {
+        let table = UITableView()
+        table.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identififer)
+       
+        return table
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemBackground
+        title = "Discover"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.tintColor = .label
+        moviesTable.delegate = self
+        moviesTable.dataSource = self
+        view.addSubview(moviesTable)
+        fetchMovies()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        moviesTable.frame = view.bounds
+    }
+    
+    func fetchMovies() {
+        firstly {
+            APICaller.shared.fetchDiscoverMovies()
+        }.done { [weak self] movies in
+            self?.models = movies.compactMap{MovieViewModel(title: $0.title ?? "", posterPath: $0.poster_path ?? "")}
+            DispatchQueue.main.async {
+                self?.moviesTable.reloadData()
+            }
+        }.catch { error in
+            print(error.localizedDescription)
+        }
     }
     
 
@@ -26,4 +62,25 @@ class SearchViewController: UIViewController {
     }
     */
 
+}
+
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return models.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: MovieTableViewCell.identififer, for: indexPath) as? MovieTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        cell.configure(with: models[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 160
+    }
+    
 }
