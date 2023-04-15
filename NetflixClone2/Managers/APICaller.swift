@@ -106,6 +106,21 @@ class APICaller {
         return fetchMovies(endpoint: endpoint, paremeters: parameters)
     }
     
+    func searchMovie(query: String) -> Promise<[Movie]> {
+        do {
+              guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+                  throw APIError.invalidURL
+              }
+              let endpoint = "/3/search/movie?)"
+            
+            /*if let url = URL(string: "\(Constants.baseURL)/3/search/movie?api_key=\(Constants.API_KEY)&query=\(query)") */
+            let parameters = ["api_key": Constants.API_KEY, "query": query]
+              return fetchMovies(endpoint: endpoint, paremeters: parameters)
+          } catch {
+              return Promise(error: error)
+          }
+    }
+    
     func fetchTrendingTV() -> Promise<[TV]> {
         
         Promise { result in

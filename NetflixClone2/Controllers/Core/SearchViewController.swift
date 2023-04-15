@@ -11,12 +11,21 @@ class SearchViewController: UIViewController {
     
     var models = [MovieViewModel]()
     
+    let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: SearchResultsViewController())
+        searchController.searchBar.placeholder = "Search a Movie or TV show"
+        searchController.searchBar.barStyle = .default
+        return searchController
+    }()
+
+    
     let moviesTable: UITableView = {
         let table = UITableView()
         table.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identififer)
        
         return table
     }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +36,8 @@ class SearchViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.tintColor = .label
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
         moviesTable.delegate = self
         moviesTable.dataSource = self
         view.addSubview(moviesTable)
@@ -82,5 +93,34 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }
+    
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        
+        guard let query = searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty,
+              query.trimmingCharacters(in: .whitespaces).count > 3,
+              let resultsController = searchController.searchResultsController as? SearchResultsViewController
+        else {
+            return
+        }
+        
+        firstly {
+            APICaller.shared.searchMovie(query: query)
+        }.done { movies in
+            resultsController.movies = movies
+            
+            DispatchQueue.main.async {
+                resultsController.searchResultsCollection.reloadData()
+            }
+        
+        }.catch { error in
+            print(error)
+        }
+    }
+    
     
 }
