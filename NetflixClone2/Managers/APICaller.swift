@@ -167,7 +167,43 @@ class APICaller {
       
     }
     
+    func fetchMovie(query: String) -> Promise<VideoElement> {
+        
+        Promise { result in
+            guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+                result.reject(APIError.invalidURL)
+                return
+            }
+            guard let url = URL(string: "\(Constants.YoutubeBaseURL)/youtube/v3/search?q=\(query)&key=\(Constants.YoutubeAPI_KEY)")  else {
+                result.reject(APIError.invalidURL)
+                return
+            }
+            
+            let task = URLSession.shared.dataTask(with: url) { data, _, error in
+                if let error = error {
+                    result.reject(error)
+                    return
+                }
+                guard let data = data else {
+                    result.reject(APIError.invalidResponse)
+                    return
+                }
+                
+                do {
+                    let res = try JSONDecoder().decode(YoutubeSearchResponse.self, from: data)
+                    result.fulfill(res.items[0])
+                } catch {
+                    result.reject(error)
+                }
+            }
+            
+            task.resume()
+        }
+        
+       
+        
+        
+       
+    }
     
-    
-  
 }

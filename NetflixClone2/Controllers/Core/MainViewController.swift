@@ -43,6 +43,8 @@ class MainViewController: UIViewController {
         moviesCollectionTable.tableHeaderView = headerView
         
         configureNavbar()
+        
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -65,10 +67,6 @@ class MainViewController: UIViewController {
         ]
         
     }
-    
-
-
-
 }
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
@@ -86,6 +84,8 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             for: indexPath) as? CollectionViewTableViewCell else {
             return UITableViewCell()
         }
+        
+        cell.delegate = self
         
         switch indexPath.section {
         case Sections.trendingMovies.rawValue:
@@ -164,6 +164,19 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         header.textLabel?.text = header.textLabel?.text?.captitilizeFirstLetter()
         header.textLabel?.textColor = .label
     }
+    
+}
+
+extension MainViewController: CollectionViewTableViewCellDelegate {
+    func didTapCellItem(model: TitlePreviewViewModel) {
+        
+        DispatchQueue.main.async { [weak self] in
+            let vc = TitlePreviewViewController()
+            vc.configure(with: model)
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     
 }
 

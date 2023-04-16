@@ -33,6 +33,9 @@
 		4D59CF9029E8301A00A9B559 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59CF8F29E8301A00A9B559 /* MovieTableViewCell.swift */; };
 		4D59CF9229E835F500A9B559 /* MovieVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59CF9129E835F500A9B559 /* MovieVIewModel.swift */; };
 		4D59CF9729E9C9FA00A9B559 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59CF9629E9C9FA00A9B559 /* SearchResultsViewController.swift */; };
+		4DF3266729EB0BFF001797BB /* TitlePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3266629EB0BFF001797BB /* TitlePreviewViewController.swift */; };
+		4DF3266929EB2136001797BB /* TitlePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3266829EB2136001797BB /* TitlePreviewViewModel.swift */; };
+		4DF3266B29EB2197001797BB /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3266A29EB2197001797BB /* YoutubeSearchResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +83,9 @@
 		4D59CF8F29E8301A00A9B559 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		4D59CF9129E835F500A9B559 /* MovieVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieVIewModel.swift; sourceTree = "<group>"; };
 		4D59CF9629E9C9FA00A9B559 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		4DF3266629EB0BFF001797BB /* TitlePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewController.swift; sourceTree = "<group>"; };
+		4DF3266829EB2136001797BB /* TitlePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewModel.swift; sourceTree = "<group>"; };
+		4DF3266A29EB2197001797BB /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				4D59CF9129E835F500A9B559 /* MovieVIewModel.swift */,
+				4DF3266829EB2136001797BB /* TitlePreviewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -189,6 +196,7 @@
 			children = (
 				4D59CEFA29E2D45A00A9B559 /* Movie.swift */,
 				4D59CEFC29E30C7E00A9B559 /* TV.swift */,
+				4DF3266A29EB2197001797BB /* YoutubeSearchResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -235,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				4D59CF9629E9C9FA00A9B559 /* SearchResultsViewController.swift */,
+				4DF3266629EB0BFF001797BB /* TitlePreviewViewController.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -386,7 +395,9 @@
 				4D59CEA429D7350600A9B559 /* MainViewController.swift in Sources */,
 				4D59CF9029E8301A00A9B559 /* MovieTableViewCell.swift in Sources */,
 				4D59CF9729E9C9FA00A9B559 /* SearchResultsViewController.swift in Sources */,
+				4DF3266B29EB2197001797BB /* YoutubeSearchResponse.swift in Sources */,
 				4D59CEE429D8853A00A9B559 /* HeroHeaderView.swift in Sources */,
+				4DF3266729EB0BFF001797BB /* TitlePreviewViewController.swift in Sources */,
 				4D59CEE229D743C200A9B559 /* CollectionViewTableViewCell.swift in Sources */,
 				4D59CEF629E2D3BB00A9B559 /* APICaller.swift in Sources */,
 				4D59CEFB29E2D45A00A9B559 /* Movie.swift in Sources */,
@@ -395,6 +406,7 @@
 				4D59CEA229D7350600A9B559 /* SceneDelegate.swift in Sources */,
 				4D59CF4729E4353900A9B559 /* TitleCollectionViewCell.swift in Sources */,
 				4D59CEF429E0890500A9B559 /* Extensions.swift in Sources */,
+				4DF3266929EB2136001797BB /* TitlePreviewViewModel.swift in Sources */,
 				4D59CEAA29D7350600A9B559 /* NetflixClone2.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

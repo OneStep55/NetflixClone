@@ -6,10 +6,17 @@
 //
 
 import UIKit
+import PromiseKit
+
+protocol CollectionViewTableViewCellDelegate {
+    func didTapCellItem(model: TitlePreviewViewModel)
+}
 
 class CollectionViewTableViewCell: UITableViewCell {
     
     static let identifier = "CollectionViewTableViewCell"
+    
+    var delegate: CollectionViewTableViewCellDelegate?
     var movies = [Movie]() {
         didSet {
             DispatchQueue.main.async { [weak self] in
@@ -85,5 +92,27 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let title: String
+        let description: String
+        
+        if movies.isEmpty {
+            title = tvs[indexPath.row].name
+            description = tvs[indexPath.row].overview ?? ""
+        } else {
+            title = movies[indexPath.row].title ?? ""
+            description = movies[indexPath.row].overview ?? ""
+        }
+        
+        firstly {
+            APICaller.shared.fetchMovie(query: "\(title) trailer")
+        }.done { [weak self] videoElement in
+            let model = TitlePreviewViewModel(title: title, description: description, videoElement: videoElement)
+            self?.delegate?.didTapCellItem(model: model)
+        }.catch { error in
+            print(error)
+        }
+    }
     
 }
