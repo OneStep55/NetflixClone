@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import PromiseKit
+
+protocol SearchResultsViewControllerDelegate {
+    func didSelectCellItem(model: TitlePreviewViewModel)
+}
 
 class SearchResultsViewController: UIViewController {
     
     var movies = [Movie]()
-    
+    var delegate: SearchResultsViewControllerDelegate?
     let searchResultsCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3  - 10, height: 170)
@@ -47,6 +52,26 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         cell.configure(with: movies[indexPath.row].poster_path ?? "")
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        
+        let title = movie.title ?? ""
+        
+        firstly {
+            APICaller.shared.fetchMovie(query: "\(title) trailer")
+        }.done { [weak self] videoElement in
+            let model = TitlePreviewViewModel(
+                title: title,
+                description: movie.overview ?? "",
+                videoElement: videoElement)
+            
+            self?.delegate?.didSelectCellItem(model: model)
+        }.catch { error in
+            print(error.localizedDescription)
+        }
+    }
+    
     
     
 }

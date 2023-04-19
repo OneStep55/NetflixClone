@@ -11,6 +11,7 @@ import PromiseKit
 class UpcomingViewController: UIViewController {
     
     var models = [MovieViewModel]()
+    var movies = [Movie]()
     
     let moviesTable: UITableView = {
         let table = UITableView()
@@ -43,7 +44,7 @@ class UpcomingViewController: UIViewController {
         firstly {
             APICaller.shared.fetchUpcomingMovies()
         }.done { [weak self] movies in
-            self?.models = movies.compactMap{MovieViewModel(title: $0.title ?? "", posterPath: $0.poster_path ?? "")}
+            self?.movies = movies
             DispatchQueue.main.async {
                 self?.moviesTable.reloadData()
             }
@@ -51,23 +52,11 @@ class UpcomingViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return models.count
+        return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,7 +64,9 @@ extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource {
             withIdentifier: MovieTableViewCell.identififer, for: indexPath) as? MovieTableViewCell else {
             return UITableViewCell()
         }
-        cell.configure(with: models[indexPath.row])
+        
+        let movie = movies[indexPath.row]
+        cell.configure(with: MovieViewModel(title: movie.title ?? "", posterPath: movie.poster_path ?? ""))
         return cell
         
     }
@@ -83,6 +74,26 @@ extension UpcomingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let movie = movies[indexPath.row]
+        let title = movie.title ?? ""
+        firstly {
+            APICaller.shared.fetchMovie(query: ("\(title) trailer"))
+        }.done { [weak self] videoElement in
+            let model = TitlePreviewViewModel(title: title, description: movie.overview ?? "", videoElement: videoElement)
+            
+            DispatchQueue.main.async {
+                let vc = TitlePreviewViewController()
+                vc.configure(with: model)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+        }.catch { error in
+            print(error.localizedDescription)
+        }
+    }
+    
     
     
 }
