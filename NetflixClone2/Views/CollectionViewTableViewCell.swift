@@ -65,6 +65,10 @@ class CollectionViewTableViewCell: UITableViewCell {
     func configure(tvs: [TV]) {
         self.tvs = tvs
     }
+    
+    func saveTitle(indexPath: IndexPath){
+        print(movies[indexPath.row].title)
+    }
 
 }
 
@@ -113,6 +117,17 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         }.catch { error in
             print(error)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(actionProvider:  { _ in
+            let dowloandAction = UIAction(title: "download") { [weak self] _ in
+                self?.saveTitle(indexPath: indexPaths[0])
+            }
+            
+            return UIMenu(options: .displayInline, children: [dowloandAction])
+        })
+        return config
     }
     
 }
