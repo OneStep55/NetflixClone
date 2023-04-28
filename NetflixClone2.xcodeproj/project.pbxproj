@@ -36,6 +36,7 @@
 		4DF3266729EB0BFF001797BB /* TitlePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3266629EB0BFF001797BB /* TitlePreviewViewController.swift */; };
 		4DF3266929EB2136001797BB /* TitlePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3266829EB2136001797BB /* TitlePreviewViewModel.swift */; };
 		4DF3266B29EB2197001797BB /* YoutubeSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3266A29EB2197001797BB /* YoutubeSearchResponse.swift */; };
+		4DF3269329F81BB2001797BB /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF3269229F81BB2001797BB /* DataPersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		4DF3266629EB0BFF001797BB /* TitlePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewController.swift; sourceTree = "<group>"; };
 		4DF3266829EB2136001797BB /* TitlePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewModel.swift; sourceTree = "<group>"; };
 		4DF3266A29EB2197001797BB /* YoutubeSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeSearchResponse.swift; sourceTree = "<group>"; };
+		4DF3269229F81BB2001797BB /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				4D59CEF529E2D3BB00A9B559 /* APICaller.swift */,
+				4DF3269229F81BB2001797BB /* DataPersistenceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				4D59CEF429E0890500A9B559 /* Extensions.swift in Sources */,
 				4DF3266929EB2136001797BB /* TitlePreviewViewModel.swift in Sources */,
 				4D59CEAA29D7350600A9B559 /* NetflixClone2.xcdatamodeld in Sources */,
+				4DF3269329F81BB2001797BB /* DataPersistenceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

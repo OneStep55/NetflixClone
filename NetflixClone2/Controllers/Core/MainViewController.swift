@@ -44,8 +44,31 @@ class MainViewController: UIViewController {
         
         configureNavbar()
         
+        let queue = DispatchQueue(label:
+        "queue", attributes: .concurrent)
+    
+        queue.sync
+        {
+            print("A")
+        }
+        
+            
+        queue.async{
+        
+         print( "B")
+        }
+        queue.sync {
+            print("C")
+        }
+        
+       
+        
         
     }
+    
+  
+    
+   
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
