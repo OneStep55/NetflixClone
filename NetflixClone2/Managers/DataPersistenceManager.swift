@@ -20,7 +20,7 @@ class DataPersistenceManager {
         case failedToDeleteData
     }
     
-    private func saveMovie(model: Movie, comletion: @escaping (Result<Void, Error>) -> Void) {
+     func saveMovie(model: Movie, comletion: @escaping (Result<Void, Error>) -> Void) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
@@ -42,7 +42,7 @@ class DataPersistenceManager {
     }
     
     
-    private func saveTV(model: TV, comletion: @escaping (Result<Void, Error>) -> Void) {
+     func saveTV(model: TV, comletion: @escaping (Result<Void, Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         
@@ -63,7 +63,7 @@ class DataPersistenceManager {
         }
     }
     
-    private func fetchMovies(comletion: @escaping (Result<[MovieItem], Error>) -> Void) {
+     func fetchMovies(comletion: @escaping (Result<[MovieItem], Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return
         }
@@ -79,7 +79,7 @@ class DataPersistenceManager {
         }
     }
     
-    private func fetchTVs(comletion: @escaping (Result<[TVItem], Error>) -> Void) {
+     func fetchTVs(comletion: @escaping (Result<[TVItem], Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         let request: NSFetchRequest<TVItem>
@@ -93,7 +93,7 @@ class DataPersistenceManager {
         }
     }
     
-    private func deleteMovie(movie: MovieItem, comletion: @escaping (Result<Void, Error>) -> Void) {
+     func deleteMovie(movie: MovieItem, comletion: @escaping (Result<Void, Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let context = appDelegate.persistentContainer.viewContext
         
@@ -106,7 +106,7 @@ class DataPersistenceManager {
         }
     }
     
-    private func deleteTV(tv: TVItem, comletion: @escaping (Result<Void, Error>) -> Void) {
+     func deleteTV(tv: TVItem, comletion: @escaping (Result<Void, Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         let context = appDelegate.persistentContainer.viewContext

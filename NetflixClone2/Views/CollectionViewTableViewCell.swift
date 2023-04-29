@@ -67,7 +67,16 @@ class CollectionViewTableViewCell: UITableViewCell {
     }
     
     func saveTitle(indexPath: IndexPath){
-        print(movies[indexPath.row].title)
+        if tvs.isEmpty {
+            DataPersistenceManager.shared.saveMovie(model: movies[indexPath.row]) { result in
+                switch result {
+                case .success():
+                    print("movie saved")
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 
 }
