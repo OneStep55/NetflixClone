@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PromiseKit
 
 class DownloadsViewController: UIViewController {
     
@@ -97,8 +98,39 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
         return 160
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let name: String
+        let overview: String
+        
+        if indexPath.section == 0 {
+            let movie = movies[indexPath.row]
+            name = movie.title ?? ""
+            overview = movie.overview ?? ""
+        } else {
+            let tv = tvs[indexPath.row]
+            name = tv.name ?? ""
+            overview = tv.overview ?? ""
+        }
+        
+        firstly {
+            APICaller.shared.fetchMovie(query: "\(name) trailer")
+        }.done { [weak self] videoElement in
+            let model = TitlePreviewViewModel(title: name, description: overview, videoElement: videoElement)
+            
+            DispatchQueue.main.async {
+                let vc = TitlePreviewViewController()
+                vc.configure(with: model)
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+            
+        }.catch { error in
+            print(error.localizedDescription)
+        }
+        
+        
+    }
     
 }
-
-
 
