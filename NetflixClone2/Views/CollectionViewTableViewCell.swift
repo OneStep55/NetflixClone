@@ -71,7 +71,16 @@ class CollectionViewTableViewCell: UITableViewCell {
             DataPersistenceManager.shared.saveMovie(model: movies[indexPath.row]) { result in
                 switch result {
                 case .success():
-                    print("movie saved")
+                    NotificationCenter.default.post(Notification(name: NSNotification.Name("Downloaded")))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        } else {
+            DataPersistenceManager.shared.saveTV(model: tvs[indexPath.row]) { result in
+                switch result {
+                case .success():
+                    NotificationCenter.default.post(Notification(name: NSNotification.Name("Downloaded")))
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
@@ -130,7 +139,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(actionProvider:  { _ in
-            let dowloandAction = UIAction(title: "download") { [weak self] _ in
+            let dowloandAction = UIAction(title: "Download") { [weak self] _ in
                 self?.saveTitle(indexPath: indexPaths[0])
             }
             

@@ -30,6 +30,10 @@ class DownloadsViewController: UIViewController {
         downloadedMoviesTable.delegate = self
         downloadedMoviesTable.dataSource = self
         fetchMovies()
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("Downloaded"), object: nil, queue: nil) { [weak self] _ in
+            self?.fetchMovies()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -82,7 +86,7 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
             let movie = movies[indexPath.row]
             model = MovieViewModel(title: movie.title ?? "", posterPath: movie.poster_path ?? "")
         } else {
-            let tv = tvs[indexPath.count]
+            let tv = tvs[indexPath.row]
             model = MovieViewModel(title: tv.name ?? "", posterPath: tv.poster_path ?? "")
         }
         cell.configure(with: model)
